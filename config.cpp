@@ -22,7 +22,6 @@ class CfgPatches
 };
 
 class cfgVehicles {
-    class AnimationSources;
 
     class Car_F;
     class gm_wheeled_car_base: Car_F {
