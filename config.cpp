@@ -20,8 +20,11 @@ class CfgPatches
 };
 
 class cfgVehicles {
+    class AnimationSources;
 
     class gm_wheeled_car_base;
+    class gm_source_user_base;
+
 	class gm_p601_base: gm_wheeled_car_base {     
 
             maxSpeed = 120; // this is definitely the right max speed
@@ -29,7 +32,7 @@ class cfgVehicles {
             switchTime = 2;
             latency = 2.5;
             // redRpm = 4200;
-            // idleRpm = 600;       
+            // idleRpm = 600;
 
             class Exhausts
                 {
@@ -118,6 +121,33 @@ class cfgVehicles {
                     };
 
 
+                    class thrust_01_ext {
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,1,350};
+                        frequency = 0.9 + HZ_RPM1*0.3;
+                        volume = engineOn*camPos*((0.6*FACTOR(thrust,0.1,1)))*VOLUME_RPM1;
+                    };
+                    class thrust_02_ext {
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,1,350};
+                        frequency = 0.9 + HZ_RPM2*0.3;
+                        volume = engineOn*camPos*((0.6*FACTOR(thrust,0.1,1)))*VOLUME_RPM2;
+                    };
+                    class thrust_03_ext {
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,0.9,350};
+                        frequency = 0.9 + HZ_RPM3*0.3;
+                        volume = engineOn*camPos*((0.6*FACTOR(thrust,0.1,1)))*VOLUME_RPM3;
+                    };
+                    class thrust_04_ext {
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,0.9,350};
+                        frequency = 0.9 + HZ_RPM4*0.3;
+                        volume = engineOn*camPos*((0.6*FACTOR(thrust,0.1,1)))*VOLUME_RPM4;
+                    };
+
+                    delete thrust_05_ext;
+                    delete thrust_06_ext;
+                    delete thrust_07_ext;
+
+
+
                     class Idle_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_idle.ogg", 0.562341, 1, 200};
@@ -148,8 +178,25 @@ class cfgVehicles {
                         frequency = 0.8 + HZ_RPM4*0.2;
                         volume = engineOn*(1-camPos)*(VOLUME_RPM4*0.3);
                     };
+                    delete engine_05_int;
+                    delete engine_06_int;
+                    delete engine_07_int;
+
+                    class thrust_01_int {
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",1,1};
+                        frequency = "0.3 + (rpm factor [500, 2900]) * 0.8";
+                        volume = engineOn * (1-camPos) * thrust *  (rpm factor[500,2500]);
+                    };
+
                 };
         };
+
+        class gm_gc_civ_p601_base: gm_p601_base {};
+        class gm_gc_civ_p601: gm_gc_civ_p601_base {};
+        class gm_gc_dp_p601: gm_p601_base {};
+        
+        class gm_p601_patrol_base: gm_p601_base {};
+        class gm_gc_pol_p601: gm_p601_patrol_base {};
 };
 
 #include "CfgEventHandlers.hpp"
