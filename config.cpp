@@ -96,32 +96,33 @@ class cfgVehicles {
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_idle.ogg", 0.562341, 1, 200};
                         frequency = "1";
-                        volume = "engineOn * camPos * (rpm factor[1500, 600])";
+                        volume = "engineOn * camPos * (rpm factor[1200, 600])";
                     };
                     class engine_01_ext
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_down0.ogg", 1, 1, 200};
                         frequency = "1 + (rpm factor[600, 1500])";
-                        volume = "engineOn*camPos*((rpm factor[600, 1500])*0.5)";
+                        volume = "engineOn*camPos*(((rpm/3000) factor[(10/  3000),(50/  3000)]) *   ((rpm/3000) factor[(300/    3000),(400/ 3000)]))";
                     };
                     class engine_02_ext
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_down1.ogg", 1, 1, 200};
                         frequency = "0.9 + (rpm factor[1300, 2400])";
-                        volume = "engineOn*camPos*((rpm factor[1300, 2400])*0.5)";
+                        volume = "engineOn*camPos*(((rpm/3000) factor[(420/ 3000),(320/ 3000)]) *   ((rpm/3000) factor[(500/    3000),(600/ 3000)]))";
                     };
                     class engine_03_ext
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_down2.ogg", 1, 1, 200};
                         frequency = "0.8 + (rpm factor[2200, 3300])";
-                        volume = "engineOn*camPos*((rpm factor[2200, 3300])*0.5)";
+                        volume = "engineOn*camPos*((rpm/3000) factor[(550/  3000),0.35])";
                     };
                     class engine_04_ext
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_down3.ogg", 1, 1, 200};
                         frequency = "0.7 + (rpm factor[3000, 4200])";
-                        volume = "engineOn*camPos*((rpm factor[3000, 4200])*0.5)";
+                        volume = "0";
                     };
+
 
                     // only 4 gears, i dont want to have those, but deleting doesnt seem to work properly
                     class engine_05_ext {
