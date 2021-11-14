@@ -13,13 +13,23 @@ class CfgPatches
 	};
 };
 
-
 class cfgVehicles {
 
     class gm_wheeled_car_base;
 	class gm_p601_base: gm_wheeled_car_base;
 
     class Sounds;
+
+    class Exhausts
+            {
+                class exhaust_1_1
+                {
+                    position = "exhaust_1_1_pos";
+                    direction = "exhaust_1_1_dir";
+                    effect = "grad_gm_trabi_exhaust";
+                };
+            };
+            
     class Sounds: Sounds
             {
                 class siren_ext
@@ -67,3 +77,5 @@ class cfgVehicles {
             };
 
 };
+
+#include <CfgEventHandlers.hpp>
