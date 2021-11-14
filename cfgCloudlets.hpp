@@ -14,13 +14,13 @@ class CfgCloudlets {
         particleType = "Billboard";
         timerPeriod = 1;
         lifeTime = "4 * (engineOn interpolate [0,1,3.5,1])";
-        moveVelocity[] = {"speedX * 2", "speedY * 2", "speedZ / 4"};
+        moveVelocity[] = {"speedX * 6", "speedY * 6", "speedZ / 6"};
         rotationVelocity=1;
         weight = 1.5;
         volume = 1;
         rubbing = 0.40000001;
-        size[] = {0.03,0.04,0.07,0.40000001,0.60000002,0.75,0.85000002,0.92000002,1};
-        sizeCoef = "1.75 * (engineOn interpolate [0,2,4,2])";
+        size[] = {0.03,0.04,0.07,0.10000001,0.20000002,0.35,0.45000002,0.52000002,,0.6,0.7,0.8,0.9,1};
+        sizeCoef = "1.25 * (engineOn interpolate [0,2,4,2])";
         color[] = {
             {0.54*2,0.6*2,0.74*2,0.2},
             {0.54/1,0.6/1,0.74/1,0.079999998},

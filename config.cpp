@@ -36,6 +36,8 @@ class cfgVehicles {
             switchTime = 1;
             latency = 1.5;
             enginePower = 26;
+            peakTorque = 200; // 1.2* 155.979;
+            maxOmega = 600;
             // redRpm = 4200;
             // idleRpm = 600;
 
@@ -50,8 +52,8 @@ class cfgVehicles {
                 };
 
 
-            soundEngineOnInt[] = {"grad_gm_trabi\sounds\trabant_start.ogg", 0.630957, 1, 200};
-            soundEngineOnExt[] = {"grad_gm_trabi\sounds\trabant_start.ogg", 0.630957, 1, 200};
+            soundEngineOnInt[] = {"grad_gm_trabi\sounds\trabant_start2.ogg", 0.630957, 1, 200};
+            soundEngineOnExt[] = {"grad_gm_trabi\sounds\trabant_start2.ogg", 0.630957, 1, 200};
             soundEngineOffInt[] = {"grad_gm_trabi\sounds\trabant_stop.ogg", 0.630957, 1, 200};
             soundEngineOffExt[] = {"grad_gm_trabi\sounds\trabant_stop.ogg", 0.630957, 1, 200};
                 
@@ -80,18 +82,6 @@ class cfgVehicles {
                     #define RPM_2 2400
                     #define RPM_3 3300
                     #define RPM_4 4200
-
-                    #define HZ_IDLE FACTOR_RPM(50,700)
-                    #define HZ_RPM1 FACTOR_RPM(700,1500)
-                    #define HZ_RPM2 FACTOR_RPM(1500,2400)
-                    #define HZ_RPM3 FACTOR_RPM(2400,3300)
-                    #define HZ_RPM4 FACTOR_RPM(3300,4200)
-
-                    #define VOLUME_IDLE (speed factor [0, 5])
-                    #define VOLUME_RPM1 (speed factor [0, 10])
-                    #define VOLUME_RPM2 (speed factor [5, 30])
-                    #define VOLUME_RPM3 (speed factor [20, 70])
-                    #define VOLUME_RPM4 (speed factor [50, 120])
                     
 
                     #define VOLUME_MULTI 1.2
@@ -105,90 +95,90 @@ class cfgVehicles {
                     class Idle_ext
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_idle.ogg", 0.562341, 1, 200};
-                        frequency = 1;
-                        volume = engineOn * camPos * VOLUME_IDLE;
+                        frequency = "1";
+                        volume = "engineOn * camPos * (rpm factor[1500, 600])";
                     };
                     class engine_01_ext
                     {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_down.ogg", 0.562341, 1, 200};
-                        frequency = 1;
-                        volume = engineOn * camPos * VOLUME_RPM1;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_down0.ogg", 1, 1, 200};
+                        frequency = "1 + (rpm factor[600, 1500])";
+                        volume = "engineOn*camPos*((rpm factor[600, 1500])*0.5)";
                     };
                     class engine_02_ext
                     {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_load.ogg", 0.562341, 1, 200};
-                        frequency = 1;
-                        volume = engineOn * camPos * VOLUME_RPM2;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_down1.ogg", 1, 1, 200};
+                        frequency = "0.9 + (rpm factor[1300, 2400])";
+                        volume = "engineOn*camPos*((rpm factor[1300, 2400])*0.5)";
                     };
                     class engine_03_ext
                     {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_run.ogg", 0.562341, 1, 200};
-                        frequency = 1;
-                        volume = engineOn * camPos * VOLUME_RPM3;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_down2.ogg", 1, 1, 200};
+                        frequency = "0.8 + (rpm factor[2200, 3300])";
+                        volume = "engineOn*camPos*((rpm factor[2200, 3300])*0.5)";
                     };
                     class engine_04_ext
                     {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 1;
-                        volume = engineOn * camPos * VOLUME_RPM4;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_down3.ogg", 1, 1, 200};
+                        frequency = "0.7 + (rpm factor[3000, 4200])";
+                        volume = "engineOn*camPos*((rpm factor[3000, 4200])*0.5)";
                     };
 
                     // only 4 gears, i dont want to have those, but deleting doesnt seem to work properly
                     class engine_05_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
 
                     class engine_06_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
 
                     class engine_07_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
-
 
                     class thrust_01_ext {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_down.ogg",1,1,350};
-                        frequency = "0.3 + (rpm factor [600, 1500]) * 0.8";
-                         volume = 0;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_thrust.ogg",1,1,350};
+                        frequency = "((rpm factor[800,600]) * 0.8";
+                        volume = "(thrust * 10 * engineOn) * (camPos) * (rpm factor[800,600])";
                     };
+
                     class thrust_02_ext {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_load.ogg",1,1,350};
-                        frequency = "0.3 + (rpm factor [1300, 2400]) * 0.8";
-                         volume = 0;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run.ogg",1,1,350};
+                        frequency = "0.3 + ((rpm factor[1000, 2000]) * 0.8";
+                        volume = "(thrust * 3 * engineOn) * (camPos) * (rpm factor[1000,2000])";
                     };
                     class thrust_03_ext {
-                        sound[] = {"grad_gm_trabi\sounds\trabant_run.ogg",1,1,350};
-                        frequency = "0.3 + (rpm factor [2200, 3400]) * 0.8";
-                         volume = 0;
+                        sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",1,1,350};
+                        frequency = "0.3 + ((rpm factor[1500, 4200]) * 0.8";
+                        volume = "(thrust * 3 * engineOn) * (camPos) * (rpm factor[1500,4200])";
                     };
                     class thrust_04_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",1,1,350};
-                        frequency = "0.3 + (rpm factor [3200, 4200]) * 0.8";
-                         volume = 0;
+                        frequency = "0.3 + (rpm factor[3200, 4200]) * 1";
+                         volume = "0";
                     };
 
                     // only 4 gears, i dont want to have those, but deleting doesnt seem to work properly
                     class thrust_05_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,0.9,350};
-                        frequency = 0.9 + HZ_RPM4*0.3;
-                        volume = 0;
+                        frequency = "0.9 + 1*0.3";
+                        volume = "0";
                     };
                     class thrust_06_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,0.9,350};
-                        frequency = 0.9 + HZ_RPM4*0.3;
-                        volume = 0;
+                        frequency = "0.9 + 1*0.3";
+                        volume = "0";
                     };
                     class thrust_07_ext {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",0.5*VOLUME_MULTI,0.9,350};
-                        frequency = 0.9 + HZ_RPM4*0.3;
-                        volume = 0;
+                        frequency = "0.9 + 1*0.3";
+                        volume = "0";
                     };
 
 
@@ -196,58 +186,58 @@ class cfgVehicles {
                     class Idle_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_idle.ogg", 0.562341, 1, 200};
-                        frequency = 0.9 + HZ_IDLE*0.1;
-                        volume = engineOn*(1-camPos)*(VOLUME_IDLE*0.3);
+                        frequency = "0.9 + 1*0.1";
+                        volume = "engineOn*(1-camPos)*(1*0.3) * (1-thrust)";
                     };
                     class engine_01_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_load.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM1*0.2;
-                        volume = engineOn*(1-camPos)*(VOLUME_RPM1*0.3);
+                        frequency = "0.8 + (rpm factor [600, 1500])*0.2";
+                        volume = "engineOn*(1-camPos)*((rpm factor[600, 1500])*0.3)";
                     };
                     class engine_02_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM2*0.2;
-                        volume = engineOn*(1-camPos)*(VOLUME_RPM2*0.3);
+                        frequency = "0.8 + (rpm factor [1300, 2400])*0.2";
+                        volume = "engineOn*(1-camPos)*((rpm factor[1300, 2400])*0.3)";
                     };
                     class engine_03_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM3*0.2;
-                        volume = engineOn*(1-camPos)*(VOLUME_RPM3*0.3);
+                        frequency = "0.8 + (rpm factor [2200, 3400])*0.2";
+                        volume = "engineOn*(1-camPos)*((rpm factor[2200, 3400])*0.3)";
                     };
                     class engine_04_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = engineOn*(1-camPos)*(VOLUME_RPM4*0.3);
+                        frequency = "0.8 + (rpm factor[3300,4200])*0.2";
+                        volume = "engineOn*(1-camPos)*((rpm factor[3300, 4200])*0.3)";
                     };
 
                     // only 4 gears, i dont want to have those, but deleting doesnt seem to work properly
                     class engine_05_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
                     class engine_06_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
                     class engine_07_int
                     {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg", 0.562341, 1, 200};
-                        frequency = 0.8 + HZ_RPM4*0.2;
-                        volume = 0;
+                        frequency = "0.8 + 1*0.2";
+                        volume = "0";
                     };
 
                     class thrust_01_int {
                         sound[] = {"grad_gm_trabi\sounds\trabant_run2.ogg",1,1};
                         frequency = "0.3 + (rpm factor [3200, 4200]) * 0.8";
-                        volume = engineOn * (1-camPos) * thrust *  (rpm factor[3200,4200]);
+                        volume = "engineOn * (1-camPos) * thrust *  (rpm factor[3200,4200])";
                     };
 
                 };
@@ -268,3 +258,4 @@ class cfgVehicles {
 
 #include "CfgEventHandlers.hpp"
 #include "CfgCloudlets.hpp"
+#include "CfgSounds.hpp"
