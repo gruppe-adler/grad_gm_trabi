@@ -14,65 +14,56 @@ class CfgPatches
 };
 
 
-class cfgMagazines {
+class cfgVehicles {
 
-	class gm_magazine_155mm_base;
-	class gm_1Rnd_155mm_he_dm21: gm_magazine_155mm_base
-		{
-			initSpeed = 210; // 810;
-		};
-};
+    class gm_wheeled_car_base;
+	class gm_p601_base: gm_wheeled_car_base;
 
+    class Sounds;
+    class Sounds: Sounds
+            {
+                class siren_ext
+                {
+                    sound[] = {"gm\gm_sounds\data\gm_gc_police_siren_01_ext", 1, 1, 800};
+                    frequency = "1";
+                    volume = "0.7 * CustomSoundController1";
+                };
+                class engine_01_ext
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_01_ext", 0.562341, 1, 200};
+                    frequency = "2 * (randomizer*0.05+0.45)+(0.5*(rpm/3000))";
+                    volume = "engineOn*camPos*(((rpm/3000) factor[(10/  3000),(50/  3000)]) *   ((rpm/3000) factor[(300/    3000),(400/ 3000)]))";
+                };
+                class engine_03_ext
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_03_ext", 0.630957, 1, 280};
+                    frequency = "(randomizer*0.05+0.15)+(0.8*(rpm/3000))";
+                    volume = "engineOn*camPos*(((rpm/3000) factor[(420/ 3000),(320/ 3000)]) *   ((rpm/3000) factor[(500/    3000),(600/ 3000)]))";
+                };
+                class engine_07_ext
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_07_ext", 0.794328, 0.8, 400};
+                    frequency = "(randomizer*0.05+0.15)+(0.85*(rpm/3000))";
+                    volume = "engineOn*camPos*((rpm/3000) factor[(550/  3000),0.35])";
+                };
+                class engine_01_int
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_01_int", 0.562341, 1, 200};
+                    frequency = "2 * (randomizer*0.05+0.45)+(0.5*(rpm/3000))";
+                    volume = "engineOn*(1-camPos)*(((rpm/3000) factor[(10/  3000),(50/  3000)]) *   ((rpm/3000) factor[(300/    3000),(400/ 3000)]))";
+                };
+                class engine_03_int
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_03_int", 0.630957, 1, 280};
+                    frequency = "(randomizer*0.05+0.15)+(0.8*(rpm/3000))";
+                    volume = "engineOn*(((rpm/3000) factor[(420/    3000),(320/ 3000)]) *   ((rpm/3000) factor[(500/    3000),(600/ 3000)]))";
+                };
+                class engine_07_int
+                {
+                    sound[] = {"gm\gm_vehicles\gm_land\gm_wheeled\gm_p601\data\sounds\gm_p601_engine_07_int", 0.794328, 0.8, 400};
+                    frequency = "(randomizer*0.05+0.15)+(0.85*(rpm/3000))";
+                    volume = "engineOn*(1-camPos)*((rpm/3000) factor[(550/  3000),0.35])";
+                };
+            };
 
-class Mode_SemiAuto;
-
-class CfgWeapons {
-    class gm_cannon_base;
-    class gm_155mm_m126_base: gm_cannon_base {
-    	class gm_SemiAuto: Mode_SemiAuto {};
-    	class range_01_single: gm_SemiAuto
-	    {
-	        artilleryDispersion = 3.2;
-	        artilleryCharge = 0.05; // 0.25 2000-4000
-	        minRange = 0;
-            minRangeProbab = 0.2;
-            midRange = 500;
-            midRangeProbab = 0.3;
-            maxRange = 1000;
-            maxRangeProbab = 0.2;
-	       
-	    };
-	    class range_02_single: range_01_single
-	    {
-	        artilleryCharge = 0.1; // 0.34 3800-7500
-	        minRange = 1000;
-            minRangeProbab = 0.2;
-            midRange = 1250;
-            midRangeProbab = 0.3;
-            maxRange = 1500;
-            maxRangeProbab = 0.2;
-	    };
-	    class range_03_single: range_01_single
-	    {
-	        artilleryCharge = 0.15; // 0.4675 7300-14600
-	        minRange = 1250;
-            minRangeProbab = 0.2;
-            midRange = 1500;
-            midRangeProbab = 0.3;
-            maxRange = 2000;
-            maxRangeProbab = 0.2;
-	    };
-    };
-    class gm_155mm_m126g: gm_155mm_m126_base
-    {
-        class range_01_single: range_01_single
-        {
-        };
-        class range_02_single: range_02_single
-        {
-        };
-        class range_03_single: range_03_single
-        {
-        };
-    };
 };
