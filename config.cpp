@@ -14,7 +14,9 @@ class CfgPatches
 		requiredVersion = 0.1;
 		requiredAddons[]=
 		{
-			"gm_vehicles_land_wheeled_p601"
+			"gm_vehicles_land_wheeled_p601",
+            "gm_vehicles_land_wheeled_p601_gc_civ_p601",
+            "gm_vehicles_land_wheeled_p601_gc_bgs_p601"
 		};
 	};
 };
@@ -22,15 +24,18 @@ class CfgPatches
 class cfgVehicles {
     class AnimationSources;
 
-    class gm_wheeled_car_base;
-    class gm_source_user_base;
+    class Car_F;
+    class gm_wheeled_car_base: Car_F {
+        class Sounds;
+        class AnimationSources;
+    };
 
 	class gm_p601_base: gm_wheeled_car_base {     
 
             maxSpeed = 120; // this is definitely the right max speed
             thrustDelay = 0.2; // thrust should be applied at once, only speed shouldnt be as fast
-            switchTime = 2;
-            latency = 2.5;
+            switchTime = 1;
+            latency = 1.5;
             // redRpm = 4200;
             // idleRpm = 600;
 
@@ -50,8 +55,11 @@ class cfgVehicles {
             soundEngineOffInt[] = {"grad_gm_trabi\sounds\trabant_stop.ogg", 0.630957, 1, 200};
             soundEngineOffExt[] = {"grad_gm_trabi\sounds\trabant_stop.ogg", 0.630957, 1, 200};
                 
-            class Sounds
+            class Sounds: Sounds
                 {
+                    delete soundSetsInt;
+                    delete soundSetsExt;
+
                     // warp factor
                     #define FACTOR(val,from,to) (val factor[from,to])
                     // RANGE(val,   begin, band, end,   band)
@@ -191,12 +199,14 @@ class cfgVehicles {
                 };
         };
 
+        /*
         class gm_gc_civ_p601_base: gm_p601_base {};
         class gm_gc_civ_p601: gm_gc_civ_p601_base {};
         class gm_gc_dp_p601: gm_p601_base {};
         
         class gm_p601_patrol_base: gm_p601_base {};
         class gm_gc_pol_p601: gm_p601_patrol_base {};
+        */
 };
 
 #include "CfgEventHandlers.hpp"
