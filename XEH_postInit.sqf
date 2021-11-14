@@ -1,1 +1,1 @@
-_this call grad_gm_trabi_fnc_misfire;
+[_this] call grad_gm_trabi_fnc_misfire;

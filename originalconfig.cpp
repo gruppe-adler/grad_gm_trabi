@@ -105,7 +105,7 @@ class gm_p601_base: gm_wheeled_car_base
             waterPPInVehicle = 0;
             waterResistanceCoef = 0.5;
             engineShiftY = 0.5;
-            enginePower = 19.2;
+            enginePower = 25; // 19.2;
             torqueCurve[] = {{"(0)", 0}, {"1/7", 0.5}, {"2/7", 0.8}, {"3/7", 0.95}, {"4/7", 1}, {"5/7", 0.98}, {"6/7", 0.7}, {1, 0}};
             maxSpeed = 100;
             maxOmega = 439.6;
